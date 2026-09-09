@@ -1,0 +1,25 @@
+<!doctype html>
+<html ng-app>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        h1 {
+            font-family: 'Times New Romen', Courier, monospace;
+            color: midnightblue;
+        }
+        ol {
+            font-family: 'Times New Romen', Courier, monospace;
+            color: darkslategray;
+        }
+    </style>
+  </head>
+  <body>
+    <h1>Filters</h1>
+    <ol>
+        <li>Number Filter: {{51234.567 | number:2}}</li>
+        <li>Currency Filter: {{75500 | currency}}</li>
+        <li>Uppercase Filter: {{"Hello AngularJS !" | uppercase}}</li>
+        <li>Lowercase Filter: {{"WEBAURA BY III" | lowercase}}</li>
+    </ol>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html ng-app="dateApp">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        h2{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color: #0d61b4;
+            text-decoration: underline;
+        }
+        p {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-size: 16px;
+        }
+    </style>
+  </head>
+  <body ng-controller="DateController">
+    <h2>Current Date in different format</h2>
+    <p><b>1. Default:</b> {{ today | date }}</p>
+    <p><b>2. Short:</b> {{ today | date:'short' }}</p>
+    <p><b>3. Medium:</b> {{ today | date:'medium' }}</p>
+    <p><b>4. Full Date:</b> {{ today | date:'fullDate' }}</p>
+    <p><b>5. Long Date:</b> {{ today | date:'longDate' }}</p>
+    <p><b>6. Short Date:</b> {{ today | date:'shortDate' }}</p>
+    <p><b>7. Medium Date:</b> {{ today | date:'mediumDate' }}</p>
+    <p><b>8. Short Time:</b> {{ today | date:'shortTime' }}</p>
+    <p><b>9. Medium Time:</b> {{ today | date:'mediumTime' }}</p>
+    <p><b>10. Custom:</b> {{ today | date:'dd/MM/yyyy HH:mm:ss' }}</p>
+    <script>
+      angular
+        .module("dateApp", [])
+        .controller("DateController", function ($scope) {
+          $scope.today = new Date();
+        });
+    </script>
+  </body>
+</html>
