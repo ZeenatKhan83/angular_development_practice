@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+   <meta charset=" UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Simple AngularJS Form</title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+   <style>
+      body {
+         font-family: Arial, sans-serif;
+         margin: 30px;
+      }
+
+      form {
+         width: 320px;
+      }
+
+      label,
+      input,
+      button {
+         display: block;
+         margin-top: 10px;
+      }
+
+      input {
+         box-sizing: border-box;
+         padding: 8px;
+         width: 100%;
+      }
+
+      button {
+         padding: 8px 16px;
+      }
+
+      .error {
+         color: #b00020;
+      }
+
+      .success {
+         color: #087f23;
+      }
+      p{
+         margin: 5px 0;
+         color: #1789e6;
+      }
+   </style>
+</head>
+<body>
+   <h1>Simple Registration Form</h1>
+
+   <form name="registrationForm" ng-submit="submitted = true" novalidate>
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" ng-model="user.name" required>
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" ng-model="user.email" required>
+
+      <p class="error" ng-show="submitted && registrationForm.$invalid">
+         Please enter a valid name and email address.
+      </p>
+
+      <button type="submit">Register</button>
+   </form>
+
+   <div class="success" ng-show="submitted && registrationForm.$valid">
+      <h2>Submitted Details</h2>
+      <p>Name: {{user.name}}</p>
+      <p>Email: {{user.email}}</p>
+   </div>
+</body>
+</html>
