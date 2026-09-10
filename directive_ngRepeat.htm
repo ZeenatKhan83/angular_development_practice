@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <title>Student Management</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f2f2;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px #aaa;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        input, select, button {
+            padding: 9px;
+            margin: 5px;
+        }
+
+        input {
+            width: 200px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        th {
+            background: #333;
+            color: white;
+        }
+
+        .pass {
+            color: green;
+            font-weight: bold;
+        }
+
+        .fail {
+            color: red;
+            font-weight: bold;
+        }
+
+        .delete {
+            background: #d9534f;
+            color: white;
+            border: none;
+        }
+
+        .add {
+            background: #333;
+            color: white;
+            border: none;
+        }
+
+        .summary {
+            margin-top: 20px;
+            padding: 15px;
+            background: #eee;
+        }
+    </style>
+</head>
+
+<body ng-controller="myCtrl">
+
+<div class="container">
+
+    <h2>Student Management</h2>
+    <input type="text"
+           ng-model="searchText"
+           placeholder="Search student">
+
+
+    <h3>Add Student</h3>
+
+    <input type="text"
+           ng-model="newStudent.name"
+           placeholder="Name">
+
+    <input type="number"
+           ng-model="newStudent.roll"
+           placeholder="Roll No">
+
+    <input type="number"
+           ng-model="newStudent.marks"
+           placeholder="Marks">
+
+    <button class="add" ng-click="addStudent()">
+        Add Student
+    </button>
+
+
+    <table>
+
+        <tr>
+            <th>Name</th>
+            <th>Roll No</th>
+            <th>Marks</th>
+            <th>Result</th>
+            <th>Grade</th>
+            <th>Action</th>
+        </tr>
+
+        <tr ng-repeat="student in students | filter:searchText | orderBy:'marks':true">
+
+            <td>{{student.name}}</td>
+
+            <td>{{student.roll}}</td>
+
+            <td>{{student.marks}}</td>
+
+            <td>
+                <span class="pass" ng-if="student.marks >= 40">
+                    Pass
+                </span>
+
+                <span class="fail" ng-if="student.marks < 40">
+                    Fail
+                </span>
+            </td>
+
+            <td>
+                <span ng-if="student.marks >= 80">A</span>
+                <span ng-if="student.marks >= 60 && student.marks < 80">B</span>
+                <span ng-if="student.marks >= 40 && student.marks < 60">C</span>
+                <span ng-if="student.marks < 40">F</span>
+            </td>
+
+            <td>
+                <button class="delete"
+                        ng-click="deleteStudent($index)">
+                    Delete
+                </button>
+            </td>
+
+        </tr>
+
+    </table>
+
+    <div class="summary">
+
+        <b>Total Students:</b>
+        {{students.length}}
+
+        <br><br>
+
+        <b>Average Marks:</b>
+        {{getAverage()}}
+
+    </div>
+
+</div>
+<script>
+
+var app = angular.module("myApp", []);
+
+app.controller("myCtrl", function($scope) {
+
+    $scope.students = [
+        {name: "Alina", roll: 101, marks: 85},
+        {name: "Amaya", roll: 102, marks: 72},
+        {name: "Zeenat", roll: 103, marks: 91},
+        {name: "Fatima", roll: 104, marks: 35},
+        {name: "Sarah", roll: 105, marks: 65}
+    ];
+
+    $scope.addStudent = function() {
+
+        $scope.students.push($scope.newStudent);
+
+        $scope.newStudent = {};
+
+    };
+    
+    $scope.deleteStudent = function(index) {
+
+        $scope.students.splice(index, 1);
+
+    };
+   
+    $scope.getAverage = function() {
+
+        var total = 0;
+
+        for (var i = 0; i < $scope.students.length; i++) {
+            total += $scope.students[i].marks;
+        }
+
+        return ($scope.students.length == 0)
+            ? 0
+            : (total / $scope.students.length).toFixed(2);
+    };
+});
+</script>
+</body>
+</html>
