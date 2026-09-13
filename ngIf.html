@@ -1,0 +1,69 @@
+<!doctype html>
+<html ng-app="myApp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <title>Students Result</title>
+    <style>
+        body{
+            font-family: 'Times New Roman', Times, serif;
+            text-align: center;
+        }
+        .container{
+            background-color: #f5f8c4;
+            max-width: 600px;
+            height: auto;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1{
+            color: #1c6fdb;
+            text-shadow: 1px 1px 2px;
+            text-decoration: underline double black 1px;
+        }
+        .pass{
+            color: green;
+            font-weight: bold;
+        }
+        .fail{
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+  </head>
+  <body ng-controller="myCtrl">
+    <div class="container">
+      <h1>Students Result</h1>
+      <input type="text" ng-model="name" placeholder="Enter student name" />
+
+      <input type="number" ng-model="num" placeholder="Enter student marks" />
+      <button ng-click="checkResult()">Check Result</button>
+
+      <div ng-if="checked">
+        <h3>{{name}}</h3>
+        <p>Marks: {{marks}}</p>
+        <p ng-if="marks >= 40" class="pass">Result: Pass</p>
+        <p ng-if="marks < 40" class="fail">Result: Fail</p>
+
+        <p ng-if="marks>=85">Grade: A</p>
+        <p ng-if="marks<85 && marks>=70">Grade: B</p>
+        <p ng-if="marks<70 && marks>=50">Grade: C</p>
+        <p ng-if="marks<50">Grade: D</p>
+        <p ng-if="marks<40">Grade: F</p>
+      </div>
+    </div>
+    <script>
+      angular.module("myApp", []).controller("myCtrl", function ($scope) {
+        $scope.checked = false;
+
+        $scope.checkResult = function () {
+          $scope.marks = $scope.num;
+          $scope.checked = true;
+        };
+      });
+    </script>
+  </body>
+</html>
