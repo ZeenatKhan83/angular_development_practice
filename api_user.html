@@ -1,0 +1,104 @@
+<!doctype html>
+<html ng-app="myApp">
+  <head>
+    <title>User Management</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f2f2f2;
+        padding: 30px;
+      }
+
+      .container {
+        width: 500px;
+        margin: auto;
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+      }
+
+      h2 {
+        text-align: center;
+      }
+
+      input {
+        width: 95%;
+        padding: 10px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button {
+        padding: 10px 20px;
+        margin-top: 8px;
+        background: #333;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #555;
+      }
+
+      .user {
+        margin-top: 15px;
+        padding: 12px;
+        background: #f1f1f1;
+        border-radius: 5px;
+      }
+
+      .name {
+        font-weight: bold;
+      }
+
+      .email {
+        color: #666;
+      }
+    </style>
+  </head>
+
+  <body ng-controller="UserController">
+    <div class="container">
+      <h2>User Management</h2>
+
+      <input type="text" ng-model="name" placeholder="Enter name" />
+
+      <input type="email" ng-model="email" placeholder="Enter email" />
+
+      <button ng-click="addUser()">Add User</button>
+
+      <div class="user" ng-repeat="user in users">
+        <div class="name">{{ user.name }}</div>
+
+        <div class="email">{{ user.email }}</div>
+      </div>
+    </div>
+
+    <script>
+      angular
+        .module("myApp", [])
+
+        .controller("UserController", function ($scope) {
+          $scope.users = [];
+
+          $scope.addUser = function () {
+            if ($scope.name && $scope.email) {
+              $scope.users.push({
+                name: $scope.name,
+                email: $scope.email,
+              });
+
+              $scope.name = "";
+              $scope.email = "";
+            }
+          };
+        });
+    </script>
+  </body>
+</html>
