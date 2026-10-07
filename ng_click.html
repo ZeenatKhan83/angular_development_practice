@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ng-click Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-app="myApp" ng-controller="myCtrl">
+
+    <h2>AngularJS Event Handling</h2>
+
+    <p>{{message}}</p>
+
+    <button ng-click="showMessage()">Click Me</button>
+
+    <script>
+        var app = angular.module("myApp", []);
+
+        app.controller("myCtrl", function($scope) {
+
+            $scope.message = "Click the button";
+
+            $scope.showMessage = function() {
+                $scope.message = "Button was clicked!";
+            };
+
+        });
+    </script>
+
+</body>
+</html>
